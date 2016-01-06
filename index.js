@@ -242,17 +242,11 @@ function Jasmine2ScreenShotReporter(opts) {
 
     this.jasmineStarted = function(suiteInfo) {
         opts.totalSpecsDefined = suiteInfo.totalSpecsDefined;
-
-        rimraf(opts.dest, function(err) {
-          if(err) {
-            throw new Error('Could not remove previous destination directory ' + opts.dest);
-          }
-
-          mkdirp(opts.dest, function(err) {
-            if(err) {
-              throw new Error('Could not create directory ' + opts.dest);
+	
+	mkdirp(opts.dest, function (err) {
+            if (err) {
+                throw new Error('Could not create directory ' + opts.dest);
             }
-          });
         });
 
         browser.getCapabilities().then(function (capabilities) {
